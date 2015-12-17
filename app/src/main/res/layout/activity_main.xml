@@ -75,4 +75,12 @@
         android:layout_alignTop="@+id/textView2"
         android:layout_toEndOf="@+id/textView2" />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="init"
+        android:id="@+id/initButton"
+        android:layout_centerVertical="true"
+        android:layout_alignParentStart="true" />
+
 </RelativeLayout>

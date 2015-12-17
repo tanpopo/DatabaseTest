@@ -20,7 +20,27 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Log.d(tag, "onCreate()");
         helper = new MyOpenHelper(this);
+
+        //init
+        Button initButton = (Button) findViewById(R.id.initButton);
+        initButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(tag, "init button clicked!");
+                SQLiteDatabase db = null;
+                try {
+                    db = helper.getReadableDatabase();
+                } catch (SQLiteException e) {
+                    Log.e(tag, e.toString());
+                } finally {
+                    if (db != null) {
+                        db.close();
+                    }
+                }
+            }
+        });
 
         //set
         Button setButton = (Button) findViewById(R.id.setButton);
@@ -59,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
         ContentValues insertValues = new ContentValues();
         insertValues.put("name", name);
         insertValues.put("val", val);
-        return db.insert("person", null, insertValues);
+        return db.insert("table_1", null, insertValues);
     }
 
 }

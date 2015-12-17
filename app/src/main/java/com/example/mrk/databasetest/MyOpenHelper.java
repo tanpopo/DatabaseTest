@@ -23,10 +23,11 @@ public class MyOpenHelper extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, 1);
     }
     public void onCreate(SQLiteDatabase db) {
+        Log.e(tag, "onCreate");
         db.beginTransaction();
         try {
             SQLiteStatement stmt;
-            db.execSQL("create table table1(name primary key, val text not null);");
+            db.execSQL("create table table_1(name primary key, val text not null);");
             stmt = db.compileStatement("insert into table1 values(?, ?);");
             for (String[] capital : INITIAL_VALUES) {
                 stmt.bindString(1, capital[0]);
@@ -34,7 +35,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 stmt.executeInsert();
             }
             db.setTransactionSuccessful();
-            Log.e(tag, "created successfully!");
+            Log.d(tag, "created successfully!");
         } catch (SQLException e) {
             Log.e(tag, e.toString());
         } finally {

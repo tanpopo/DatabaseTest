@@ -30,6 +30,7 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 stmt.bindString(2, capital[1]);
                 stmt.executeInsert();
             }
+            db.setTransactionSuccessful();
         } finally {
             db.endTransaction();
         }

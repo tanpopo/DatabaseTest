@@ -1,15 +1,18 @@
 package com.example.mrk.databasetest;
 
 import android.content.Context;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteStatement;
+import android.util.Log;
 
 /**
  * Created by 0025110012 on 2015/12/17.
  */
 public class MyOpenHelper extends SQLiteOpenHelper {
     private static String DATABASE_NAME = "database_1";
+    private static String tag = "MyOpenHelper";
 
     private String[][] INITIAL_VALUES = {
             {"apple", "red"},
@@ -31,12 +34,15 @@ public class MyOpenHelper extends SQLiteOpenHelper {
                 stmt.executeInsert();
             }
             db.setTransactionSuccessful();
+            Log.e(tag, "created successfully!");
+        } catch (SQLException e) {
+            Log.e(tag, e.toString());
         } finally {
             db.endTransaction();
         }
     }
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
+        Log.e(tag, "ERROR: Not Implemented!");
     }
 }
 
